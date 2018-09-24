@@ -9,49 +9,8 @@ var ASSETS = {
   },
   //スプライトシート
   spritesheet: {
-    "human_ss":
-    {
-        //フレーム情報
-        "frame": {
-            "width": 64,
-            "height": 64,
-            "cols": 3,
-            "rows": 4,
-        },
-        //アニメーション情報
-        "animations": {
-            //デフォの画像
-            "default": {
-                "frames": [3],
-            },
-            //左向き
-            "left_walk": {
-                "frames": [3,4,5],
-                "next": "left_walk",
-                "frequency": 4,
-            },
-            //右向き
-            "right_walk": {
-                "frames": [6,7,8],
-                "next": "right_walk",
-                "frequency": 4,
-            },
-            //上向き
-            "up_walk": {
-                "frames": [9,10,11],
-                "next": "up_walk",
-                "frequency": 4,
-            },
-            //下向き
-            "down_walk": {
-                "frames": [0,1,2],
-                "next": "down_walk",
-                "frequency": 4,
-            },
-
-        }//animationの終了
-    }//human_ssの終了
-}//spritesheetの終了
+    'human_ss': 'http://kindai-csg.com/js/spritesheet.json',
+  }//spritesheetの終了
 };
 var SCREEN_WIDTH  = 465;              // スクリーン幅
 var SCREEN_HEIGHT = 465;    
