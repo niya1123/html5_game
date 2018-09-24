@@ -3,8 +3,8 @@ spritesheet: {
     {
         //フレーム情報
         "frame": {
-            "width": 64,
-            "height": 64,
+            "width": 32,
+            "height": 32,
             "cols": 3,
             "rows": 4,
         },

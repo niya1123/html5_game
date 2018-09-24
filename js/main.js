@@ -7,74 +7,98 @@ var ASSETS = {
     bg: "http://jsrun.it/assets/a/G/5/Y/aG5YD.png",
     human:  './img/human.png',
   },
+  //スプライトシート
+  spritesheet: {
+    "human_ss":
+    {
+        //フレーム情報
+        "frame": {
+            "width": 64,
+            "height": 64,
+            "cols": 3,
+            "rows": 4,
+        },
+        //アニメーション情報
+        "animations": {
+            //デフォの画像
+            "default": {
+                "frames": [3],
+            },
+            //左向き
+            "left_walk": {
+                "frames": [3,4,5],
+                "next": "left_walk",
+                "frequency": 4,
+            },
+            //右向き
+            "right_walk": {
+                "frames": [6,7,8],
+                "next": "right_walk",
+                "frequency": 4,
+            },
+            //上向き
+            "up_walk": {
+                "frames": [9,10,11],
+                "next": "up_walk",
+                "frequency": 4,
+            },
+            //下向き
+            "down_walk": {
+                "frames": [0,1,2],
+                "next": "down_walk",
+                "frequency": 4,
+            },
+
+        }//animationの終了
+    }//human_ssの終了
+}//spritesheetの終了
 };
 var SCREEN_WIDTH  = 465;              // スクリーン幅
-var SCREEN_HEIGHT = 465;              // スクリーン高さ
-var SPEED         = 4;
-
+var SCREEN_HEIGHT = 465;    
 /*
  * メインシーン
  */
 phina.define("MainScene", {
-  // 継承
-  superClass: 'DisplayScene',
-
-  // 初期化
-  init: function(options) {
-    // super init
-    this.superInit(options);
-
-    // 背景
-    this.bg = Sprite("bg").addChildTo(this);
-    this.bg.origin.set(0, 0); // 左上基準に変更
-
-    // プレイヤー
-    this.player = Sprite('human',32,32).addChildTo(this);
-    this.player.setPosition(400, 400);
-    this.player.frameIndex = 4;  //デフォで左向き
-  },
-
-  // 更新
-  update: function(app) {
-    var p = app.pointer;
-
-    if (p.getPointing()) {
-      var diff = this.player.x - p.x;
-      if (Math.abs(diff) > SPEED) {
-        // 右に移動
-        if (diff < 0) {
-          this.player.x += SPEED;
-          this.player.scaleX = -1;
-        }
-        // 左に移動
-        else {
-          this.player.x -= SPEED;
-          this.player.scaleX = 1;
-        }
-
-      }
-    }
-    else {
-      // 待機
-      this.player.frameIndex = 4;
-    }
-  }
-});
-
-/*
- * メイン処理
- */
-phina.main(function() {
-  // アプリケーションを生成
-  var app = GameApp({
-    startLabel: 'main',   // MainScene から開始
-    width: SCREEN_WIDTH,  // 画面幅
-    height: SCREEN_HEIGHT,// 画面高さ
-    assets: ASSETS,       // アセット読み込み
+    // 継承
+    superClass: 'DisplayScene',
+    // コンストラクタ
+    init: function() {
+      // 親クラス初期化
+      this.superInit();
+      // 背景
+      this.bg = Sprite("bg").addChildTo(this);
+      this.bg.origin.set(0, 0); // 左上基準に変更
+      // スプライト画像作成
+      var sprite = Sprite('human', 64, 64).addChildTo(this);
+      // スプライトにフレームアニメーションをアタッチ
+      var anim = FrameAnimation('human_ss').attachTo(sprite);
+      // アニメーションを指定する
+      anim.gotoAndPlay('right_walk');
+      // 初期位置
+      sprite.x = this.gridX.center();
+      sprite.y = this.gridY.center();
+      // 更新イベント
+      sprite.update = function() {
+        // 移動
+        sprite.x -= 2;
+      };
+    },
   });
-
-  app.enableStats();
-
-  // 実行
-  app.run();
-});
+  /*
+   * メイン処理
+   */
+  phina.main(function() {
+    // アプリケーションを生成
+    var app = GameApp({
+      // MainScene から開始
+      startLabel: 'main',
+      width: SCREEN_WIDTH,  // 画面幅
+      height: SCREEN_HEIGHT,
+      // アセット読み込み
+      assets: ASSETS,
+    });
+    // fps表示
+    //app.enableStats();
+    // 実行
+    app.run();
+  });
