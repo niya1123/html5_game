@@ -9,7 +9,7 @@ var ASSETS = {
     'human': './img/human.png',
   },
   spritesheet:{
-    'human_ss': 'http://kindai-csg.com/js/spritesheet.json',
+    'human_ss': 'https://api.myjson.com/bins/1bu3s4',
   }, 
    
 };
