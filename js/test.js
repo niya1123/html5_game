@@ -11,7 +11,27 @@ var ASSETS = {
   },
   spritesheet:{
     'human_ss': 'https://api.myjson.com/bins/1bu3s4',
-    'slime': 'https://api.myjson.com/bins/1bs6c4',
+    'slime':
+    {
+        "frame": {
+            "width": 48,
+            "height": 48,
+            "cols": 12,
+            "rows": 8
+        },
+        "animations":{
+            "slime-left":{
+                "frames": [15,16,17],
+                "next": "slime-left",
+                "frequency": 4
+            },
+            "slime-right":{
+                "frames": [27,28,29],
+                "next": "slime-right",
+                "frequency": 4
+            }
+        }
+    }
   } 
    
 };
@@ -127,11 +147,13 @@ phina.define("Enemy",{
     update: function(){
         //画面左
         if(this.left < 0){
+            FrameAnimation('slime').attachTo(this).gotoAndPlay('slime-right');
             this.left = 0;
             this.reflectX();
         }
         //画面右
         if(this.right > SCREEN_WIDTH){
+            FrameAnimation('slime').attachTo(this).gotoAndPlay('slime-left');
             this.right = SCREEN_WIDTH;
             this.reflectX();
         }

@@ -10,6 +10,11 @@
             "frames": [15,16,17],
             "next": "slime-left",
             "frequency": 4
+        },
+        "slime-right":{
+            "frames": [27,28,29],
+            "next": "slime-right",
+            "frequency": 4
         }
     }
 }
