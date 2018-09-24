@@ -11,23 +11,7 @@ var ASSETS = {
   },
   spritesheet:{
     'human_ss': 'https://api.myjson.com/bins/1bu3s4',
-    'slime': 
-    {
-            
-        "frame": {
-            "width": 48,
-            "height": 48,
-            "cols": 12,
-            "rows": 8
-        },
-        "animations":{
-            "slime-left":{
-                "frames": [15,16,17],
-                "next": "slime-left",
-                "frequency": 4
-            },
-        }
-    },
+    'slime': 'https://api.myjson.com/bins/1bs6c4',
   } 
    
 };
