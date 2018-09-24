@@ -8,50 +8,10 @@ var ASSETS = {
     'ground': 'https://rawgit.com/alkn203/tomapiko_void/master/assets/image/ground.png',
     'human': './img/human.png',
   },
-  spritesheet: {
-    "human_ss":
-    {
-        //フレーム情報
-        "frame": {
-            "width": 32,
-            "height": 32,
-            "cols": 3,
-            "rows": 4,
-        },
-        //アニメーション情報
-        "animations": {
-            //デフォの画像
-            "default": {
-                "frames": [3],
-            },
-            //左向き
-            "left_walk": {
-                "frames": [3,4,5],
-                "next": "left_walk",
-                "frequency": 4,
-            },
-            //右向き
-            "right_walk": {
-                "frames": [6,7,8],
-                "next": "right_walk",
-                "frequency": 4,
-            },
-            //上向き
-            "up_walk": {
-                "frames": [9,10,11],
-                "next": "up_walk",
-                "frequency": 4,
-            },
-            //下向き
-            "down_walk": {
-                "frames": [0,1,2],
-                "next": "down_walk",
-                "frequency": 4,
-            },
-
-        }//animationの終了
-    }//human_ssの終了
-  }//spritesheetの終了
+  spritesheet:{
+    'human_ss': 'https://drive.google.com/open?id=1PuNgaP6votpN1iNsCNzQ3HY6XMvo3obX',
+  }, 
+   
 };
 // 定数
 var SCREEN_WIDTH   = 640; // 画面横サイズ
