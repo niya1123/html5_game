@@ -140,6 +140,7 @@ phina.define("Enemy",{
 
     init: function(){
         this.superInit('monster', ENEMY_SIZE, ENEMY_SIZE);
+        this.setInteractive(true);
         FrameAnimation('slime').attachTo(this).gotoAndPlay('slime-right');
         this.physical.velocity.x = ENEMY_SPEED + Random.randint(-10, 10);
     },
@@ -163,6 +164,9 @@ phina.define("Enemy",{
         this.physical.velocity.x *= -1;
         //向き反転
         this.scaleX *= -1;
+    },
+    onpointstart: function(){
+        this.remove();
     },
 });
 /*
