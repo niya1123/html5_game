@@ -11,8 +11,24 @@ var ASSETS = {
   },
   spritesheet:{
     'human_ss': 'https://api.myjson.com/bins/1bu3s4',
-    'slime': 'https://api.myjson.com/bins/gkuis',
-  }, 
+    'slime': 
+    {
+            
+        "frame": {
+            "width": 48,
+            "height": 48,
+            "cols": 12,
+            "rows": 8
+        },
+        "animations":{
+            "slime-left":{
+                "frames": [15,16,17],
+                "next": "slime-left",
+                "frequency": 4
+            },
+        }
+    },
+  } 
    
 };
 // 定数
@@ -70,7 +86,7 @@ phina.define("MainScene", {
   //敵生成処理
   generateEnemy: function(){
     var x = this.gridX.span(Random.randint(2,14));
-    var y = this.gridY.span(Random.randint(2,3));
+    var y =this.gridY.span(13.85);
     Enemy().addChildTo(this.enemyGroup).setPosition(x,y);
   },
 });
