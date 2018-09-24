@@ -1,0 +1,39 @@
+{
+    "frame": {
+        "width": 32,
+        "height": 32,
+        "cols": 3,
+        "rows": 4
+    },
+    "animations": {
+       
+        "default": {
+            "frames": [3]
+        },
+       
+        "left_walk": {
+            "frames": [3,4,5],
+            "next": "left_walk",
+            "frequency": 4
+        },
+       
+        "right_walk": {
+            "frames": [6,7,8],
+            "next": "right_walk",
+            "frequency": 4
+        },
+    
+        "up_walk": {
+            "frames": [9,10,11],
+            "next": "up_walk",
+            "frequency": 4
+        },
+
+        "down_walk": {
+            "frames": [0,1,2],
+            "next": "down_walk",
+            "frequency": 4
+        }
+
+    }
+}
