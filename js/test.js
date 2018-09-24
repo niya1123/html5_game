@@ -23,6 +23,7 @@ var PLAYER_SPEED   = 6;   // プレイヤーの速度
 var ENEMY_SIZE     = 64;
 var ENEMY_MAX_NUM  = 20;
 var ENEMY_INTERVAL = 150;
+var ENEMY_SPEED    = 12;
 /*
  * メインシーン
  */
@@ -69,7 +70,7 @@ phina.define("MainScene", {
   },
   //敵生成処理
   generateEnemy: function(){
-    var x = this.gridX.span(Random.randint(2,14));
+    var x = this.gridX.span(Random.randint(1,15));
     var y =this.gridY.span(13.85);
     Enemy().addChildTo(this.enemyGroup).setPosition(x,y);
   },
@@ -120,6 +121,27 @@ phina.define("Enemy",{
     init: function(){
         this.superInit('monster', ENEMY_SIZE, ENEMY_SIZE);
         FrameAnimation('slime').attachTo(this).gotoAndPlay('slime-left');
+        this.physical.velocity.x = ENEMY_SPEED;
+    },
+    //更新処理
+    update: function(){
+        //画面左
+        if(this.left < 0){
+            this.left = 0;
+            this.reflectX();
+        }
+        //画面右
+        if(this.right > SCREEN_WIDTH){
+            this.right = SCREEN_WIDTH;
+            this.reflectX();
+        }
+    },
+    //反転処理
+    reflectX: function(){
+        //移動方向反転
+        this.physical.velocity.x *= -1;
+        //向き反転
+        this.scaleX *= -1;
     },
 });
 /*
