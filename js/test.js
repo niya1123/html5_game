@@ -41,8 +41,8 @@ var SCREEN_HEIGHT  = 640; // 画面縦サイズ
 var PLAYER_SIZE    = 64;  // プレイヤーのサイズ
 var PLAYER_SPEED   = 6;   // プレイヤーの速度
 var ENEMY_SIZE     = 64;
-var ENEMY_MAX_NUM  = 20;
-var ENEMY_INTERVAL = 150;
+var ENEMY_MAX_NUM  = 100;
+var ENEMY_INTERVAL = 50;
 var ENEMY_SPEED    = 12;
 /*
  * メインシーン
@@ -140,14 +140,13 @@ phina.define("Enemy",{
 
     init: function(){
         this.superInit('monster', ENEMY_SIZE, ENEMY_SIZE);
-        FrameAnimation('slime').attachTo(this).gotoAndPlay('slime-left');
+        FrameAnimation('slime').attachTo(this).gotoAndPlay('slime-right');
         this.physical.velocity.x = ENEMY_SPEED;
     },
     //更新処理
     update: function(){
         //画面左
         if(this.left < 0){
-            FrameAnimation('slime').attachTo(this).gotoAndPlay('slime-right');
             this.left = 0;
             this.reflectX();
         }
