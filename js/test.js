@@ -59,7 +59,7 @@ phina.define("MainScene", {
   //更新処理
   update: function(app){
     var enemys = this.enemyGroup.children;
-    if(app.frame % ENEMY_INTERVAL === 0 && enemy.length < ENEMY_MAX_NUM){
+    if(app.frame % ENEMY_INTERVAL === 0 && enemys.length < ENEMY_MAX_NUM){
         this.generateEnemy();
     }  
   },
