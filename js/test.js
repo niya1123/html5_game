@@ -84,7 +84,7 @@ phina.define("MainScene", {
     });
      // プレイヤー作成
      this.player = Player().addChildTo(this)
-     .setPosition(grid.span(0.5), grid.span(8.5));
+     .setPosition(grid.span(0.5), grid.span(8.75));
   },
 });
 /*
