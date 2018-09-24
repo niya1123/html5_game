@@ -38,7 +38,7 @@ var PLAYER_SIZE    = 64;  // プレイヤーのサイズ
 var PLAYER_SPEED   = 6;   // プレイヤーの速度
 var ENEMY_SIZE     = 64;
 var ENEMY_MAX_NUM  = 20;
-var ENEMY_INTERVAL = 300;
+var ENEMY_INTERVAL = 150;
 /*
  * メインシーン
  */
