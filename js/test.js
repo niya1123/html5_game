@@ -44,6 +44,9 @@ var ENEMY_SIZE     = 64;
 var ENEMY_MAX_NUM  = 100;
 var ENEMY_INTERVAL = 15;
 var ENEMY_SPEED    = 18;
+var JUMP_POWER     = 10;
+var GRAVITY        = 0.5;
+var JUMP_FLG       = false;
 /*
  * メインシーン
  */
@@ -70,12 +73,16 @@ phina.define("MainScene", {
       Ground().addChildTo(self).setPosition(grid.span(i), grid.span(9));
     });
      // プレイヤー作成
+     var player = this.player;
      this.player = Player().addChildTo(this)
      .setPosition(grid.span(0.5), grid.span(8.75));
+     player.y = grid.span(8.75);
      //敵グループ
      this.enemyGroup = DisplayElement().addChildTo(this);
      //最初の敵生成
      this.generateEnemy();
+     //重力の設定
+    //  shape.physical.gravity.y = 0.5;
   },
   //更新処理
   update: function(app){
@@ -86,7 +93,13 @@ phina.define("MainScene", {
   },
   //タッチの処理
   onpointstart: function(){
-    this.player.reflectX();
+    // this.player.reflectX();
+    if(JUMP_FLG == false){
+        JUMP_FLG == true;
+        // player.scaleX *= -1;
+        player.physical.velocity.y = -JUMP_POWER;
+        player.physical.gravity.y = GRAVITY;
+    }
   },
   //敵生成処理
   generateEnemy: function(){
@@ -94,6 +107,7 @@ phina.define("MainScene", {
     var y =this.gridY.span(13.85);
     Enemy().addChildTo(this.enemyGroup).setPosition(x,y);
   },
+  
 });
 /*
  * プレイヤークラス
@@ -122,6 +136,15 @@ phina.define("Player", {
             this.right = SCREEN_WIDTH;
             this.reflectX();
         }
+
+        var player = this.player;
+        if ( player.y > grid.span(8.75)+10 ){
+            player.y = grid.span(8.75);
+            JUMP_FLG = false;
+            player.physical.velocity.y = 0;
+            player.physical.gravity.y = 0;
+        }
+
     },
     //反転処理
     reflectX: function(){
