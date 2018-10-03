@@ -168,21 +168,6 @@ phina.define('Player',{
       this.scaleX *= -1;
     }
   },// updateの終わり.
-
-  
-  // onpointed: function(){
-  //   // var player = this.player;
-  //   // プレイヤーが床の上なら
-  //   if(this.isGround){
-  //     // 上方向に速度を与える（ジャンプ）
-  //     this.physical.velocity.y = -JUMP_POWOR;
-  //     // 重力復活
-  //     this.physical.gravity.y = GRAVITY;
-  //     // フラグ変更
-  //     this.isGround = false;
-  //   }
-  // }
-
 }); // プレイヤークラスの終わり.
 
 /**
