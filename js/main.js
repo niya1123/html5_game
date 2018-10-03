@@ -42,6 +42,8 @@ var SCREEN_HEIGHT  = 640; // 画面縦サイズ
 var PLAYER_SIZE    = 64;  // プレイヤーのサイズ
 var PLAYER_SPEED   = 6;   // プレイヤーの速度
 var GROUND_HEIGHT  = 64;  // 地面の縦サイズ
+var JUMP_POWOR     = 10;
+var GRAVITY        = 0.5;
 var ENEMY_SIZE     = 64;
 var ENEMY_MAX_NUM  = 2;
 var ENEMY_INTERVAL = 15;
@@ -88,7 +90,7 @@ phina.define('MainScene',{
     this.generateEnemy();
 
     // 画面上をクリックした時の動き.
-    this.onpointed = function(){
+    this.onpointend = function(){
       // プレイヤーが床の上なら
       if(player.isGround){
         // 上方向に速度を与える（ジャンプ）
@@ -231,7 +233,7 @@ phina.define("Ground", {
   init: function() {
     // 親クラス初期化
     this.superInit('ground');
-    // 原点を左上に
+    // 原点を左上
     this.origin.set(0, 0);
   },
 });
