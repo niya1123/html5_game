@@ -111,19 +111,6 @@ phina.define('MainScene',{
         this.generateEnemy();
     }
     
-    // var player = this.player;
-    // // 床とヒットしたら
-    // if (this.y > SCREEN_HEIGHT - GROUND_HEIGHT) {
-    //   // y方向の速度と重力を無効にする
-    //   player.physical.velocity.y = 0;
-    //   player.physical.gravity.y = 0;
-    //   // // 位置調整
-    //   // player.y = this.floor.top;
-    //   // フラグ立て
-    //   player.isGround = true;
-    // } 
-    
-    
   },// updateの終了
 
   //敵生成処理
