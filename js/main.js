@@ -111,17 +111,17 @@ phina.define('MainScene',{
         this.generateEnemy();
     }
     
-    var player = this.player;
-    // 床とヒットしたら
-    if (this.y > SCREEN_HEIGHT - GROUND_HEIGHT) {
-      // y方向の速度と重力を無効にする
-      player.physical.velocity.y = 0;
-      player.physical.gravity.y = 0;
-      // // 位置調整
-      // player.y = this.floor.top;
-      // フラグ立て
-      player.isGround = true;
-    } 
+    // var player = this.player;
+    // // 床とヒットしたら
+    // if (this.y > SCREEN_HEIGHT - GROUND_HEIGHT) {
+    //   // y方向の速度と重力を無効にする
+    //   player.physical.velocity.y = 0;
+    //   player.physical.gravity.y = 0;
+    //   // // 位置調整
+    //   // player.y = this.floor.top;
+    //   // フラグ立て
+    //   player.isGround = true;
+    // } 
     
     
   },// updateの終了
@@ -166,6 +166,19 @@ phina.define('Player',{
     if (this.left < 0 || this.right > SCREEN_WIDTH) {
       this.physical.velocity.x *= -1;
       this.scaleX *= -1;
+    }
+
+    //地面ライン
+    var y = SCREEN_HEIGHT - GROUND_HEIGHT; 
+    // 地面
+    if (this.bottom > y) {
+      // y方向の速度と重力を無効にする
+      this.physical.velocity.y = 0;
+      this.physical.gravity.y = 0;
+      // // 位置調整
+      // player.y = this.floor.top;
+      // フラグ立て
+      this.isGround = true;
     }
   },// updateの終わり.
 }); // プレイヤークラスの終わり.
