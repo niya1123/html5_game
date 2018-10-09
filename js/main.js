@@ -42,8 +42,8 @@ var SCREEN_HEIGHT  = 640; // 画面縦サイズ
 var PLAYER_SIZE    = 64;  // プレイヤーのサイズ
 var PLAYER_SPEED   = 6;   // プレイヤーの速度
 var GROUND_HEIGHT  = 64;  // 地面の縦サイズ
-var JUMP_POWOR     = 10;
-var GRAVITY        = 0.5;
+var JUMP_POWOR     = 20;
+var GRAVITY        = 1.5;
 var ENEMY_SIZE     = 64;
 var ENEMY_MAX_NUM  = 2;
 var ENEMY_INTERVAL = 15;
@@ -159,11 +159,12 @@ phina.define('Player',{
     var y = SCREEN_HEIGHT - GROUND_HEIGHT; 
     // 地面
     if (this.bottom > y) {
+      console.log("hi")
       // y方向の速度と重力を無効にする
       this.physical.velocity.y = 0;
       this.physical.gravity.y = 0;
       // // 位置調整
-      // player.y = this.floor.top;
+      this.y = SCREEN_HEIGHT-78;
       // フラグ立て
       this.isGround = true;
     }
