@@ -48,6 +48,8 @@ var ENEMY_SIZE     = 64;
 var ENEMY_MAX_NUM  = 2;
 var ENEMY_INTERVAL = 15;
 var ENEMY_SPEED    = 18;
+var HIT_RADIUS     = 16;  // 当たり判定用の半径
+
 
 /**
  * メインシーン
@@ -78,11 +80,12 @@ phina.define('MainScene',{
     });
 
     // プレイヤーの作成
-    var player = Player('human').addChildTo(this);
+    this.player = Player('human').addChildTo(this);
 
+    var lplayer = this.player;
     // プレイヤーの初期位置の設定.
-    player.x = grid.span(0.5);
-    player.y = grid.span(8.75);
+    lplayer.x = grid.span(0.5);
+    lplayer.y = grid.span(8.75);
 
     //敵グループ
     this.enemyGroup = DisplayElement().addChildTo(this);
@@ -92,13 +95,13 @@ phina.define('MainScene',{
     // 画面上をクリックした時の動き.
     this.onpointend = function(){
       // プレイヤーが床の上なら
-      if(player.isGround){
+      if(lplayer.isGround){
         // 上方向に速度を与える（ジャンプ）
-        player.physical.velocity.y = -JUMP_POWOR;
+        lplayer.physical.velocity.y = -JUMP_POWOR;
         // 重力復活
-        player.physical.gravity.y = GRAVITY;
+        lplayer.physical.gravity.y = GRAVITY;
         // フラグ変更
-        player.isGround = false;
+        lplayer.isGround = false;
       }
     }// onpointedの終わり.
 
@@ -110,14 +113,30 @@ phina.define('MainScene',{
     if(app.frame % ENEMY_INTERVAL === 0 && enemys.length < ENEMY_MAX_NUM){
         this.generateEnemy();
     }
-    
+    // 敵とプレイヤーの辺り判定
+    this.hitEachOther();
   },// updateの終了
-
+  
   //敵生成処理
   generateEnemy: function(){
     var x = this.gridX.span(Random.randint(1,15));
     var y =this.gridY.span(13.85);
     Enemy().addChildTo(this.enemyGroup).setPosition(x,y);
+  },
+
+  hitEachOther: function(){
+    var player = this.player;
+    // var self = this;
+    // 敵をループ
+    this.enemyGroup.children.each(function(enemy) {
+      // 判定用の円
+      var c1 = Circle(player.x, player.y, HIT_RADIUS); 
+      var c2 = Circle(enemy.x, enemy.y, HIT_RADIUS); 
+      // 円判定
+      if (Collision.testCircleCircle(c1, c2)) {
+        console.log('hit!');
+      }
+    });  
   },
   
 });
@@ -159,7 +178,8 @@ phina.define('Player',{
     var y = SCREEN_HEIGHT - GROUND_HEIGHT; 
     // 地面
     if (this.bottom > y) {
-      console.log("hi")
+      // console.log(this.x);
+      // console.log("hi")
       // y方向の速度と重力を無効にする
       this.physical.velocity.y = 0;
       this.physical.gravity.y = 0;
