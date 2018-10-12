@@ -135,6 +135,7 @@ phina.define('MainScene',{
       // 円判定
       if (Collision.testCircleCircle(c1, c2)) {
         console.log('hit!');
+        enemy.remove();
       }
     });  
   },
