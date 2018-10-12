@@ -132,10 +132,10 @@ phina.define('MainScene',{
       // 判定用の円
       var c1 = Circle(player.x, player.y, HIT_RADIUS); 
       var c2 = Circle(enemy.x, enemy.y, HIT_RADIUS); 
-      console.log("p: "+player.bottom);
-      console.log("e: "+enemy.top);
+      console.log("p: "+player.x);
+      console.log("e: "+enemy.x);
       // 円判定
-      if (Collision.testCircleCircle(c1, c2) && player.bottom - enemy.top < 20) {
+      if (Collision.testCircleCircle(c1, c2) && player.bottom - enemy.top < 30 && Math.abs(player.x - enemy.x) < 10) {
         console.log('hit!');
         enemy.remove();
       }
