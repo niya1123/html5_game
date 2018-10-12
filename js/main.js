@@ -47,7 +47,7 @@ var GRAVITY        = 1.5;
 var ENEMY_SIZE     = 64;
 var ENEMY_MAX_NUM  = 2;
 var ENEMY_INTERVAL = 15;
-var ENEMY_SPEED    = 18;
+var ENEMY_SPEED    = 6;
 var HIT_RADIUS     = 16;  // 当たり判定用の半径
 
 
@@ -132,8 +132,10 @@ phina.define('MainScene',{
       // 判定用の円
       var c1 = Circle(player.x, player.y, HIT_RADIUS); 
       var c2 = Circle(enemy.x, enemy.y, HIT_RADIUS); 
+      console.log("p: "+player.bottom);
+      console.log("e: "+enemy.top);
       // 円判定
-      if (Collision.testCircleCircle(c1, c2)) {
+      if (Collision.testCircleCircle(c1, c2) && player.bottom - enemy.top < 20) {
         console.log('hit!');
         enemy.remove();
       }
